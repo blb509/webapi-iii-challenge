@@ -34,6 +34,19 @@ router.get("/users", (req, res) => {
     });
 });
 
+router.get("/posts/user/:id", (req, res) => {
+  const { id } = req.params;
+  Users.getUserPosts(id)
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(error => {
+      res.status(500).json({
+        error: "The user information could not be retrieved."
+      });
+    });
+});
+
 router.get("/users/:id", (req, res) => {
   const { id } = req.params;
   Users.getById(id)
